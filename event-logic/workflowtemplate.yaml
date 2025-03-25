@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: WorkflowTemplate
 metadata:
   name: storage-upload-workflowtemplate
-  namespace: user1
+  #namespace: user1
 spec:
   templates:
   - name: main

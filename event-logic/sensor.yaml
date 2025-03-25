@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
   name: upload-trigger
-  namespace: user1
+  #namespace: user1
 spec:
   template:
     serviceAccountName: operate-workflow-sa
