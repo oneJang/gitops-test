@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: upload-trigger
+  namespace: user1
+spec:
+  template:
+    serviceAccountName: operate-workflow-sa
+  dependencies:
+    - name: storage-event
+      eventSourceName: storage-event
+      eventName: upload
+  triggers:
+    - template:
+        name: webhook-workflow-trigger
+        argoWorkflow:
+          operation: submit
+          source:
+            resource:
+              apiVersion: argoproj.io/v1alpha1
+              kind: Workflow
+              metadata:
+                generateName: storage-upload-workflow-
+              spec:
+                serviceAccountName: operate-workflow-sa
+                entrypoint: main
+                workflowTemplateRef:
+                  name: storage-upload-workflowtemplate
+

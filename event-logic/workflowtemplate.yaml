@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: storage-upload-workflowtemplate
+  namespace: user1
+spec:
+  templates:
+  - name: main
+    steps:
+    - - name: functionA
+        template: functionA
+      - name: functionB
+        template: functionB
+  - name: functionA
+    http:
+      url: http://storage-service1.user1.192.168.10.146.nip.io
+      method: POST
+      headers:
+      - name: Content-Type
+        value: application/json
+  - name: functionB
+    http:
+      url: http://storage-service2.user1.192.168.10.146.nip.io
+      method: POST
+      headers:
+      - name: Content-Type
+        value: application/json
+
